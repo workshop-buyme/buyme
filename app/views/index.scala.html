@@ -1,0 +1,50 @@
+@()
+
+<ul class="list-unstyled auctions">
+  <li class="auction" ng-repeat="auction in auctions">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <button type="button" class="btn btn-danger pull-right" ng-click="remove(auction)" ng-if="!auction.hasEnded && auction.seller === user.username">Delete</button>
+        <h4>{{auction.productName}}: ${{auction.offers.length ? auction.offers[auction.offers.length-1].amount : auction.startPrice}} (from {{auction.seller}})</h4>
+        <div ng-if="auction.hasEnded">
+          <div class="hasEnded">Ended</div>
+        </div>
+      </div>
+      <div class="panel-body">
+        <p>
+          Started at: {{ auction.startDate | date:'HH:mm:ss' }}, end at: {{ auction.endDate | date:'HH:mm:ss' }}
+        </p>
+        <p ng-if="!auction.offers.length">
+          No offer yet. Be the first!
+        </p>
+        <p ng-if="auction.offers.length">
+          <a ng-click="auction._expanded = !auction._expanded;">
+            Already {{auction.offers.length}} offer{{auction.offers.length > 1 ? 's' : ''}}!!
+          </a>
+
+          <ul ng-show="auction._expanded">
+            <li ng-repeat="offer in auction.offers | orderBy:'amount':true">
+              {{offer.buyer}}: ${{offer.amount}}
+            </li>
+          </ul>
+        </p>
+      </div>
+      <div class="panel-footer">
+        <div ng-if="!auction.hasEnded">
+          <form ng-submit="makeOffer(auction)" class="form-inline" role="form">
+            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+              <div class="input-group">
+                <span class="input-group-addon">$</span>
+                <input type="number" class="form-control" placeholder="How much?" ng-model="offerForms[auction.id]" ng-required="true">
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Make an offer!</button>
+          </form>
+        </div>
+        <div ng-if="auction.hasEnded">
+          And the winner is... <span class="label" ng-class="auction.offers.length ? 'label-success': 'label-danger'">{{auction.offers.length ? auction.offers[auction.offers.length-1].buyer : 'nobody'}}</span>
+        </div>
+      </div>
+    </div>
+  </li>
+</ul>

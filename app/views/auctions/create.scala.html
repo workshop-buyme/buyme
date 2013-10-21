@@ -1,0 +1,38 @@
+@()
+
+<h1>Want to sell something?</h1>
+
+<form class="form-horizontal" role="form" ng-submit="create()">
+  <div class="form-group">
+    <label for="inputName" class="col-lg-2 col-md-2 control-label">Name</label>
+    <div class="col-lg-10 col-md-10">
+      <input type="text" class="form-control" id="inputName" placeholder="How do you call your product?" ng-model="auctionForm.productName" ng-required="true">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="inputPrice" class="col-lg-2 col-md-2 control-label">Price</label>
+    <div class="col-lg-10 col-md-10">
+      <div class="input-group">
+        <span class="input-group-addon">$</span>
+        <input type="number" class="form-control" id="inputPrice" placeholder="Where do you want to start the auction?" ng-model="auctionForm.startPrice" ng-required="true">
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="inputDuration" class="col-lg-2 col-md-2 control-label">Duration</label>
+    <div class="col-lg-10 col-md-10">
+      <div class="input-group">
+        <input type="number" class="form-control" id="inputDuration" placeholder="How long should your auction last?" ng-model="auctionForm.duration" ng-required="true">
+        <span class="input-group-addon">seconds</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10 col-md-offset-2 col-md-10">
+      <button type="submit" class="btn btn-primary">Sell it!</button>
+    </div>
+  </div>
+</form>

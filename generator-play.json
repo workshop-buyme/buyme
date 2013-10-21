@@ -1,0 +1,25 @@
+{
+  "global": {
+    "emptyBrackets": ""
+  },
+  "app": {
+    "name": "buyme",
+    "version": "0.0.1-SNAPSHOT",
+    "playVersion": "2.1.4",
+    "language": "scala",
+    "secret": "azoj/>oWvlwl;T2kIGoB:_V;pX;bH726slb7z?F1Pxj4N1N?DWjEM>qGO\\=;Imul",
+    "langs": "en",
+    "dependencies": [
+      "jdbc",
+      "anorm"
+    ]
+  },
+  "grunt": {
+    "preprocessors": {
+      "css": [
+        "LESS"
+      ],
+      "js": []
+    }
+  }
+}

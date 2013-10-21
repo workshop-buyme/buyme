@@ -1,0 +1,119 @@
+@(connected: Option[String] = None)(content: Html)
+
+@import play.api.Play
+@import play.api.Play.current
+@import utils.AppConfiguration
+
+@defining(AppConfiguration(Play.application.configuration)) { conf =>
+
+<!DOCTYPE html>
+
+<html ng-app="buyme">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="fragment" content="!" />
+
+    <title>Buy Me</title>
+
+    <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+
+    @if(Play.isProd) {
+      <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/" + conf.styleName + "-" + conf.version + ".min.css")">
+    } else {
+      <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/" + conf.styleName + ".css")">
+    }
+  </head>
+
+  <body>
+    <header>
+      <nav class="navbar navbar-default navbar-static-top ng-cloak" role="navigation" ng-controller="NavCtrl">
+        <div class="container">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="/">Buy me!</a>
+          </div>
+
+          <ul class="nav navbar-nav navbar-right" ng-if="!user">
+            <li>
+              <a href="/login" class="navbar-btn-link">
+                <button type="button" class="btn btn-primary navbar-btn">Log in</button>
+              </a>
+            </li>
+            <li>
+              <a href="/signup" class="navbar-btn-link">
+                <button type="button" class="btn btn-default navbar-btn">Sign up</button>
+              </a>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right" ng-if="user">
+            <li>
+              <a href="/account" ng-bind="user.username"></a>
+            </li>
+            <li>
+              <a href="/auctions/create" class="navbar-btn-link">
+                <button type="button" class="btn btn-primary navbar-btn">Create auction!</button>
+              </a>
+            </li>
+            <li>
+              <button type="button" class="btn btn-danger navbar-btn" ng-click="logout()">Log out</button>
+            </li>
+          </ul>
+        </div>
+
+      </nav>
+    </header>
+
+    <div class="container">
+      <div class="alerts ng-cloak">
+        <div ng-repeat="alert in alerts">
+          <div ng-class="'alert alert-dismissable alert-' + (alert.type || 'warning')">
+            <button type="button" class="close" aria-hidden="true" ng-click="closeAlert(alert)">&times;</button>
+            <div ng-bind-html="alert.message"></div>
+          </div>
+        </div>
+      </div>
+
+      <div ng-view></div>
+    </div>
+
+    <footer>
+      
+    </footer>
+    
+
+    @if(Play.isProd) {
+      <script type="text/javascript" src="@routes.Assets.at("javascripts/" + conf.scriptName + "-" + conf.version + "..min.js")"></script>
+    } else {
+      <script type="text/javascript" src="@routes.Assets.at("javascripts/vendors/jquery/jquery.js")"></script>
+      <script type="text/javascript" src="@routes.Assets.at("javascripts/vendors/lodash/lodash.js")"></script>
+      <script type="text/javascript" src="@routes.Assets.at("javascripts/vendors/angular-latest/angular.js")"></script>
+      <script type="text/javascript" src="@routes.Assets.at("javascripts/vendors/angular-latest/angular-route.js")"></script>
+      <script type="text/javascript" src="@routes.Assets.at("javascripts/vendors/angular-latest/angular-sanitize.js")"></script>
+      <script type="text/javascript" src="@routes.Assets.at("javascripts/vendors/angular-latest/angular-resource.js")"></script>
+      <script type="text/javascript" src="@routes.Assets.at("javascripts/vendors/restangular/restangular.js")"></script>
+
+      <script type="text/javascript" src="@routes.Assets.at("javascripts/" + conf.scriptName + ".js")"></script>
+      <script type="text/javascript" src="@routes.Application.sessionJs"></script>
+      <script type="text/javascript" src="@routes.Assets.at("javascripts/global/alerts.js")"></script>
+      <script type="text/javascript" src="@routes.Assets.at("javascripts/global/navController.js")"></script>
+      <script type="text/javascript" src="@routes.Assets.at("javascripts/global/websocketService.js")"></script>
+      <script type="text/javascript" src="@routes.Assets.at("javascripts/users/usersService.js")"></script>
+      <script type="text/javascript" src="@routes.Assets.at("javascripts/users/usersController.js")"></script>
+      <script type="text/javascript" src="@routes.Assets.at("javascripts/users/signupController.js")"></script>
+      <script type="text/javascript" src="@routes.Assets.at("javascripts/users/loginController.js")"></script>
+      <script type="text/javascript" src="@routes.Assets.at("javascripts/auctions/auctionsService.js")"></script>
+      <script type="text/javascript" src="@routes.Assets.at("javascripts/auctions/auctionsController.js")"></script>
+      <script type="text/javascript" src="@routes.Assets.at("javascripts/auctions/auctionCreateController.js")"></script>
+      <script type="text/javascript" src="@routes.Assets.at("javascripts/offers/offersService.js")"></script>
+      <script type="text/javascript" src="@routes.Assets.at("javascripts/offers/offersController.js")"></script>
+
+
+      <script src="http://localhost:35729/livereload.js?snipver=1" type="text/javascript"></script>
+    }
+
+    @content
+  </body>
+</html>
+
+}

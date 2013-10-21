@@ -1,0 +1,25 @@
+@import "bootstrap/less/bootstrap";
+@import "font-awesome/less/font-awesome";
+
+@FontAwesomePath:    "fonts/vendors/fontawesome";
+
+.navbar-btn-link {
+  padding: 0px 5px !important;
+}
+
+.auction {
+  position: relative;
+  overflow: hidden;
+
+  .hasEnded {
+    font-size: 36px;
+    text-align: center;
+    color: white;
+    background-color: @brand-danger;
+    position: absolute;
+    top: 35px;
+    right: -60px;
+    width: 250px;
+    .rotate(45deg);
+  }
+}

@@ -1,0 +1,42 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Main template, the root page of your single page app
+GET     /                                        controllers.Application.main(url: String = "")
+
+# All HTML templates, prefixed by /views
+GET     /views/index                             controllers.Application.index
+
+GET     /views/users/account                     controllers.users.templates.account
+GET     /views/users/login                       controllers.users.templates.login
+GET     /views/users/signup                      controllers.users.templates.signup
+
+GET     /views/auctions/create                   controllers.auctions.templates.create
+
+# REST API consuming and serving JSON, prefixed by /api
+
+GET     /api/users/logout                        controllers.Users.logout
+POST    /api/users/login                         controllers.Users.login
+GET     /api/users/logged                        controllers.Users.logged
+POST    /api/users/signup                        controllers.Users.signup
+->      /api/users                               controllers.Users
+
+POST    /api/auctions/:id/offers                 controllers.Auctions.addOffer(id: String)
+->      /api/auctions                            controllers.Auctions
+
+->      /api/offers                              controllers.Offers
+
+# Realtime
+
+GET     /api/websocketurl/:id                    controllers.Application.websocketUrl(id: String)
+GET     /websocket                               controllers.Application.websocket(id: String)
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/javascripts/global/session.js    controllers.Application.sessionJs
+
+GET     /assets/*file                            controllers.Assets.at(path="/public", file)
+
+# Fallback route to catch all HTML5 navigation and let the JavaScript code
+# of the root page handle it.
+GET     /*url                                    controllers.Application.main(url: String)
