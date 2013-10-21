@@ -211,7 +211,7 @@ module.exports = function (grunt) {
       "files": [
         {
           "expand": true,
-          "cwd": "<%= config.dir.bower.root %>/lodash/",
+          "cwd": "<%= config.dir.bower.root %>/lodash/dist/",
           "src": [
             "lodash.js"
           ],

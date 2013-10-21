@@ -31,17 +31,12 @@ app.controller('AuctionsCtrl', ['$scope', '$location', 'Alerts', 'Auctions', fun
         });
 
         if (scopeAuction) {
+          scopeAuction.maxOffer = auction.maxOffer;
           scopeAuction.offers = auction.offers;
         }
       });
     });
   });
-  
-  $scope.selectedAuction = undefined;
-
-  $scope.selectAuction = function (item) {
-    $scope.selectedAuction =  item;
-  };
 
   $scope.offerForms = {};
 
@@ -56,7 +51,7 @@ app.controller('AuctionsCtrl', ['$scope', '$location', 'Alerts', 'Auctions', fun
         $scope.offerForms[auction.id] = undefined;
         Alerts.success('You just took the lead! Will you keep it until the end?');
       }, function (error) {
-        Alerts.error('God dammit... an error just occured');
+        Alerts.error('God dammit... an error just occured: ' + angular.toJson(error.data));
       });
     } else {
       Alerts.error('Sorry, but you need to put more money on it.');

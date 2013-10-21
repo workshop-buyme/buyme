@@ -45,8 +45,8 @@ object Auctions extends ReactiveMongoAutoSourceController[Auction] {
     request.body.validate[Offer].fold(
       errors => Future(BadRequest(JsError.toFlatJson(errors))),
       offer => this.res.batchUpdate(
-        Json.obj("_id" -> Json.obj("$oid" -> idAuction), "hasEnded" -> false, "maxOffer" -> Json.obj("lt" -> offer.amount)),
-        Json.obj("$push" -> Json.obj("offers" -> offer, "maxOffer" -> offer.amount))
+        Json.obj("_id" -> Json.obj("$oid" -> idAuction), "hasEnded" -> false, "maxOffer" -> Json.obj("$lt" -> offer.amount)),
+        Json.obj("$push" -> Json.obj("offers" -> offer), "$set" -> Json.obj("maxOffer" -> offer.amount))
       ).flatMap { lastError =>
         if (lastError.n == 1) {
           this.res.get(BSONObjectID(idAuction)).map {

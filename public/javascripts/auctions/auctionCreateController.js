@@ -7,7 +7,7 @@ app.controller('AuctionCreateCtrl', ['$scope', '$location', 'Alerts', 'Auctions'
       endDate: Date.now() + $scope.auctionForm.duration * 1000,
       seller: $scope.user.username,
       hasEnded: false,
-      maxAmount: $scope.auctionForm.startPrice,
+      maxOffer: $scope.auctionForm.startPrice,
       offers: []
     })).then(function (auction) {
       Alerts.success('Looks like your auction just got the 1st place!');

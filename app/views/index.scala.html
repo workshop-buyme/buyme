@@ -5,7 +5,7 @@
     <div class="panel panel-default">
       <div class="panel-heading">
         <button type="button" class="btn btn-danger pull-right" ng-click="remove(auction)" ng-if="!auction.hasEnded && auction.seller === user.username">Delete</button>
-        <h4>{{auction.productName}}: ${{auction.offers.length ? auction.offers[auction.offers.length-1].amount : auction.startPrice}} (from {{auction.seller}})</h4>
+        <h4>{{auction.productName}}: ${{auction.maxOffer}} (from {{auction.seller}})</h4>
         <div ng-if="auction.hasEnded">
           <div class="hasEnded">Ended</div>
         </div>
