@@ -41,8 +41,6 @@ app.controller('AuctionsCtrl', ['$scope', '$location', 'Alerts', 'Auctions', fun
   $scope.offerForms = {};
 
   $scope.makeOffer = function (auction) {
-    console.log(auction);
-    console.log($scope.offerForms);
     var offerAmount = $scope.offerForms[auction.id];
     var auctionMaxPrice = auction.offers.length ? _.last(auction.offers).amount : auction.startPrice;
     if (offerAmount && offerAmount > auctionMaxPrice) {

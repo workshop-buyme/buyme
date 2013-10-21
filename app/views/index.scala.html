@@ -22,15 +22,14 @@
             Already {{auction.offers.length}} offer{{auction.offers.length > 1 ? 's' : ''}}!!
           </a>
 
-          <ul ng-show="auction._expanded">
-            <li ng-repeat="offer in auction.offers | orderBy:'amount':true">
-              {{offer.buyer}}: ${{offer.amount}}
-            </li>
-          </ul>
+          <dl class="dl-horizontal" ng-show="auction._expanded">
+            <dt ng-repeat-start="offer in auction.offers | orderBy:'amount':true">{{offer.buyer}}</dt>
+            <dd ng-repeat-end>${{offer.amount}}</dd>
+          </dl>
         </p>
       </div>
       <div class="panel-footer">
-        <div ng-if="!auction.hasEnded">
+        <div ng-if="!auction.hasEnded && user">
           <form ng-submit="makeOffer(auction)" class="form-inline" role="form">
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
               <div class="input-group">

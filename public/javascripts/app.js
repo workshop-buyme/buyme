@@ -36,10 +36,10 @@ var app = angular.module('buyme', ['ngRoute', 'ngSanitize', 'ngResource', 'resta
     };
 
     $rootScope.$on('login', function (event) {
-      WebSocketService.initWebsocket($rootScope.user.username);
+      WebSocketService.init($rootScope.user.username);
     });
 
     $rootScope.$on('logout', function (event) {
-
+      WebSocketService.close();
     });
   }]);

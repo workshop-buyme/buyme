@@ -13,17 +13,12 @@ app.factory('WebSocketService', ['Restangular', '$rootScope', '$log', function (
   }
 
   function receiveEvent(event) {
-    console.log(event);
     var data = JSON.parse(event.data);
-    // Handle errors
+
     if(data.error) {
-      console.log("WS Error ", data.error);
       if(wsSocket) wsSocket.close();
-      // TODO manage error
       return;
     } else {
-      console.log("WS received ", data);
-      
       switch (data.kind) {
         case 'auction': $rootScope.$broadcast('auction-' + data.action, data.value); break;
         case 'offer': $rootScope.$broadcast('offer-' + data.action, data.value); break;
@@ -36,7 +31,7 @@ app.factory('WebSocketService', ['Restangular', '$rootScope', '$log', function (
 
   // Will do a GET at '/websocket/:id' and return a promise
   // which will return a JSON object when resolved
-  function initWebsocket(id) {
+  function init(id) {
     Restangular.one('websocketurl', id).get().then( function(url) {
 
       var WS = window['MozWebSocket'] ? MozWebSocket : WebSocket;
@@ -44,11 +39,15 @@ app.factory('WebSocketService', ['Restangular', '$rootScope', '$log', function (
 
       wsSocket.onmessage = receiveEvent;
     });
+  }
 
+  function close() {
+    if(wsSocket) wsSocket.close();
   }
 
   return {
     sendMessage: sendMessage,
-    initWebsocket: initWebsocket
+    init: init,
+    close: close
   };
 }]);
