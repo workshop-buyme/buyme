@@ -2,29 +2,12 @@
 
 var path = require("path");
 
-// Your can dynamically rename task by filling this hash
-// Add a new key correspond to the grunt plugin name, the value
-// must be another hash where keys are original task names and values
-// are new names.
-// Example: grunt-contrib-copy: { copy: "cp" }
-// This will rename the "copy" task of the "grunt-contrib-copy" plugin to "cp"
-var renamedTasks = {
-
-};
 
 module.exports = function (grunt) {
   // Lo-Dash for the win!
   var _ = grunt.util._;
 
-  // Renaming tasks according to the previous configuration
-  require("matchdep").filterDev("grunt-*").forEach(function (plugin) {
-    grunt.loadNpmTasks(plugin);
-    if (renamedTasks[plugin]) {
-      _.forEach( renamedTasks[plugin], function (newName, originalName) {
-        grunt.renameTask(originalName, newName);
-      });
-    }
-  });
+  require("matchdep").filterDev("grunt-*").forEach(grunt.loadNpmTasks);
 
   // Basic configuration of our project
   // Retrieve the package.json file
@@ -79,9 +62,7 @@ module.exports = function (grunt) {
   // Why not directly calling "bower install"? Because sometime,
   // you will need to perform more than just cloning Git repos
   grunt.registerTask("bower", [
-    "shell:bowerInstall",
-    "parallel:bowerBuild",
-    "clean:bower"
+    "shell:bowerInstall"
   ]);
 
   // Here you will build your ressources for dev purposes,
@@ -89,7 +70,7 @@ module.exports = function (grunt) {
   grunt.registerTask("build", [
     "clean:public",
     "parallel:bowerCopy",
-    "less:raw"
+    "less:dev"
   ]);
 
   // The default task is for developpers, so they just have to run "grunt"
@@ -113,7 +94,6 @@ module.exports = function (grunt) {
   grunt.initConfig({
   "config": configuration,
   "clean": {
-    "bower": [],
     "public": [
       "<%= config.dir.public.scripts %>/vendors/**/*",
       "<%= config.dir.public.styles %>/vendors/**/*"
@@ -126,7 +106,7 @@ module.exports = function (grunt) {
         "<%= config.dir.resources.less %>"
       ]
     },
-    "raw": {
+    "dev": {
       "files": {
         "<%= config.dir.public.styles %>/<%= config.play.application.files.style %>.css": "<%= config.dir.resources.less %>/<%= config.play.application.files.style %>.less"
       }
@@ -174,7 +154,7 @@ module.exports = function (grunt) {
         "<%= config.dir.resources.less %>/*.less"
       ],
       "tasks": [
-        "less:raw"
+        "less:dev"
       ]
     },
     "public": {
@@ -219,15 +199,51 @@ module.exports = function (grunt) {
         }
       ]
     },
-    "bowerAngularLatest": {
+    "bowerAngular": {
       "files": [
         {
           "expand": true,
-          "cwd": "<%= config.dir.bower.root %>/angular-latest/build/",
+          "cwd": "<%= config.dir.bower.root %>/angular/",
           "src": [
             "*.js"
           ],
-          "dest": "<%= config.dir.public.scripts %>/vendors/angular-latest/"
+          "dest": "<%= config.dir.public.scripts %>/vendors/angular/"
+        }
+      ]
+    },
+    "bowerAngularRoute": {
+      "files": [
+        {
+          "expand": true,
+          "cwd": "<%= config.dir.bower.root %>/angular-route/",
+          "src": [
+            "*.js"
+          ],
+          "dest": "<%= config.dir.public.scripts %>/vendors/angular/"
+        }
+      ]
+    },
+    "bowerAngularSanitize": {
+      "files": [
+        {
+          "expand": true,
+          "cwd": "<%= config.dir.bower.root %>/angular-sanitize/",
+          "src": [
+            "*.js"
+          ],
+          "dest": "<%= config.dir.public.scripts %>/vendors/angular/"
+        }
+      ]
+    },
+    "bowerAngularResource": {
+      "files": [
+        {
+          "expand": true,
+          "cwd": "<%= config.dir.bower.root %>/angular-resource/",
+          "src": [
+            "*.js"
+          ],
+          "dest": "<%= config.dir.public.scripts %>/vendors/angular/"
         }
       ]
     },
@@ -265,35 +281,18 @@ module.exports = function (grunt) {
       "tasks": [
         "copy:bowerJQuery",
         "copy:bowerLodash",
-        "copy:bowerAngularLatest",
+        "copy:bowerAngular",
+        "copy:bowerAngularRoute",
+        "copy:bowerAngularSanitize",
+        "copy:bowerAngularResource",
         "copy:bowerRestangular",
         "copy:bowerFontAwesome"
-      ]
-    },
-    "bowerBuild": {
-      "tasks": [
-        [
-          "shell:angularLatestNpm",
-          "shell:angularLatestPackage"
-        ]
       ]
     }
   },
   "shell": {
     "bowerInstall": {
       "command": "bower install",
-      "options": {
-        "stdout": true
-      }
-    },
-    "angularLatestNpm": {
-      "command": "(cd ./<%= config.dir.bower.root %>/angular-latest && exec npm install)",
-      "options": {
-        "stdout": true
-      }
-    },
-    "angularLatestPackage": {
-      "command": "(cd ./<%= config.dir.bower.root %>/angular-latest && exec grunt clean buildall)",
       "options": {
         "stdout": true
       }

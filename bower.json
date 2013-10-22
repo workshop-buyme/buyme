@@ -4,7 +4,10 @@
   "dependencies": {
     "jquery": "~2.0.0",
     "lodash": "~2.2.0",
-    "angular-latest": "1.2.0-rc.3",
+    "angular": "1.2.0-rc.3",
+    "angular-route": "1.2.0-rc.3",
+    "angular-sanitize": "1.2.0-rc.3",
+    "angular-resource": "1.2.0-rc.3",
     "restangular": "~1.1.0",
     "bootstrap": "~3.0.0",
     "font-awesome": "~3.2.0"

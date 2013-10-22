@@ -32,6 +32,6 @@ This a workshop which aim to build a nice web application in 3h.
 
 ## Authors
 
-- [Paul Dijou](http://pauldijou.fr/) [@paul_dijou](http://twitter.com/paul_dijou)
-- [Stéphane Godbillon](http://stephane.godbillon.com/) [@sgodbillon](http://twitter.com/sgodbillon)
-- [Pascal Voitot](http://mandubian.com/) [@mandubian](http://twitter.com/mandubian)
+- [Paul Dijou](http://pauldijou.fr/) - [@paul_dijou](http://twitter.com/paul_dijou)
+- [Stéphane Godbillon](http://stephane.godbillon.com/) - [@sgodbillon](http://twitter.com/sgodbillon)
+- [Pascal Voitot](http://mandubian.com/) - [@mandubian](http://twitter.com/mandubian)
