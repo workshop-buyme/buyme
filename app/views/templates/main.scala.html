@@ -1,4 +1,4 @@
-@(connected: Option[String] = None)(content: Html)
+@(content: Html)
 
 @import play.api.Play
 @import play.api.Play.current
@@ -94,7 +94,7 @@
       <script type="text/javascript" src="@routes.Assets.at("javascripts/vendors/restangular/restangular.js")"></script>
 
       <script type="text/javascript" src="@routes.Assets.at("javascripts/" + conf.scriptName + ".js")"></script>
-      <script type="text/javascript" src="@routes.Application.sessionJs"></script>
+      <script type="text/javascript" src="@controllers.users.routes.templates.sessionJs"></script>
       <script type="text/javascript" src="@routes.Assets.at("javascripts/global/alerts.js")"></script>
       <script type="text/javascript" src="@routes.Assets.at("javascripts/global/navController.js")"></script>
       <script type="text/javascript" src="@routes.Assets.at("javascripts/global/websocketService.js")"></script>

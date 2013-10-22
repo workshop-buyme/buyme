@@ -23,7 +23,6 @@ object Users extends ReactiveMongoAutoSourceController[User] {
       error => Future(BadRequest(JsError.toFlatJson(error))),
       user  =>
         res.find(Json.obj("username" -> user.username)).flatMap{ us =>
-          play.Logger.info("users:"+us)
           us.headOption match {
             case None =>
               res.insert(user).flatMap{ id => 
@@ -78,6 +77,10 @@ package users {
 
     def signup = Action {
       Ok(views.html.users.signup())
+    }
+
+    def sessionJs = Action.async { implicit request =>
+      Users.getLoggedUser.map( optUser => Ok(views.js.session(optUser)))
     }
   }
 }

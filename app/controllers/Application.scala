@@ -22,15 +22,19 @@ class Receiver extends Actor {
 
 object Application extends Controller {
   def main(url: String) = Action {
-    Ok(views.html.templates.main()(play.api.templates.Html("")))
+    Ok(views.html.templates.main(play.api.templates.Html("")))
   }
 
   def index = Action {
     Ok(views.html.index())
   }
 
-  def sessionJs = Action.async { implicit request =>
-    Users.getLoggedUser.map( optUser => Ok(views.js.session(optUser)))
+  def viewNotFound(url: String) = Action {
+    NotFound
+  }
+
+  def apiNotFound(url: String) = Action {
+    NotFound
   }
 
   def websocketUrl(id: String) = Action { implicit request =>

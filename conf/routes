@@ -14,6 +14,8 @@ GET     /views/users/signup                      controllers.users.templates.sig
 
 GET     /views/auctions/create                   controllers.auctions.templates.create
 
+GET     /views/*url                              controllers.Application.viewNotFound(url: String)
+
 # REST API consuming and serving JSON, prefixed by /api
 
 GET     /api/users/logout                        controllers.Users.logout
@@ -32,8 +34,10 @@ POST    /api/auctions/:id/offers                 controllers.Auctions.addOffer(i
 GET     /api/websocketurl/:id                    controllers.Application.websocketUrl(id: String)
 GET     /websocket                               controllers.Application.websocket(id: String)
 
+GET     /api/*url                                controllers.Application.apiNotFound(url: String)
+
 # Map static resources from the /public folder to the /assets URL path
-GET     /assets/javascripts/global/session.js    controllers.Application.sessionJs
+GET     /assets/javascripts/global/session.js    controllers.users.templates.sessionJs
 
 GET     /assets/*file                            controllers.Assets.at(path="/public", file)
 
