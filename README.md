@@ -1,21 +1,37 @@
-This is your new Play 2.1.4 application
-=====================================
+# Buy me!
 
-This file will be packaged with your application, when using `play dist`.
+This a workshop which aim to build a nice web application in 3h.
 
-First time?
+## Goals
 
-- npm install
-- grunt bower
-- grunt
+- Use nice technologies
+- Discover new tools
+- Do some real stuff
+- Have a lot of fun
+- Being awesome at the end
 
-Juste added a Bower dependency?
+## Documentation
 
-- grunt bower
+- [Slides](http://workshop-buyme.github.io)
+- [Wiki](https://github.com/workshop-buyme/buyme/wiki)
 
-Standard procedure
+## Stack
 
-- grunt
+- HTML + CSS + JavaScript
+- Scala
+- MongoDB
 
+## Frameworks / Tools
 
-Bootstraped with <3 using [yoplay!](https://pauldijou.github.com/yoplay)
+- yoplay!
+- AngularJS
+- Play!
+- Autosource
+- ActorRoom
+- ReactiveMongo
+
+## Authors
+
+- [Paul Dijou](http://pauldijou.fr/) [@paul_dijou](http://twitter.com/paul_dijou)
+- [Stéphane Godbillon](http://stephane.godbillon.com/) [@sgodbillon](http://twitter.com/sgodbillon)
+- [Pascal Voitot](http://mandubian.com/) [@mandubian](http://twitter.com/mandubian)
