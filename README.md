@@ -1,6 +1,6 @@
 # Buy me!
 
-This is a workshop which aim to build a nice web application in 3h.
+This is a workshop aiming to build a nice web application in 3h.
 
 ## Goals
 
